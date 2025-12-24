@@ -13,10 +13,10 @@ from logic.kpi_calculations import (
 from visuals.charts import line_chart, bar_chart
 
 # ---------------- PAGE CONFIG ----------------
-st.set_page_config(page_title="Sales Performance Dashboard", layout="wide")
+st.set_page_config(page_title="Real-Time Sales Analytics Platform", layout="wide")
 
-st.title("📊 Sales Performance Dashboard (Real-Time)")
-st.markdown("Designed for **management-level decision making** using MongoDB Atlas.")
+st.title("Real-Time Sales Analytics Platform")
+st.markdown("Analyze and visualize sales data with live updates.")
 
 # ---------------- LOAD DATA FROM MONGODB ----------------
 df = fetch_all_sales()
@@ -34,7 +34,7 @@ else:
     region_options = sorted(df["Region"].dropna().unique().tolist())
 
 # ---------------- SIDEBAR: REAL-TIME INPUT ----------------
-st.sidebar.header("➕ Add New Sale")
+st.sidebar.header("Add New Sale")
 
 date = st.sidebar.date_input("Date", datetime.today())
 region = st.sidebar.selectbox("Region", region_options)
@@ -52,7 +52,7 @@ if st.sidebar.button("Add Sale"):
     }
 
     insert_sale(new_sale)
-    st.sidebar.success("✅ Sale saved to MongoDB Atlas!")
+    st.sidebar.success("Sale saved to MongoDB Atlas!")
 
     # Reload data after insert
     df = fetch_all_sales()
@@ -63,7 +63,7 @@ if not df.empty:
 
     total_revenue, best_product, best_region = calculate_kpis(df)
 
-    st.subheader("📌 Key Performance Indicators")
+    st.subheader("Key Performance Indicators")
 
     c1, c2, c3 = st.columns(3)
     c1.metric("Total Revenue", f"₹ {total_revenue:,.0f}")
@@ -81,7 +81,7 @@ if not df.empty:
                 monthly_trend(df),
                 "Month",
                 "Revenue",
-                "📈 Monthly Revenue Trend"
+                "Monthly Revenue Trend"
             ),
             use_container_width=True
         )
@@ -92,7 +92,7 @@ if not df.empty:
                 product_performance(df),
                 "Product",
                 "Revenue",
-                "📦 Product Performance"
+                "Product Performance"
             ),
             use_container_width=True
         )
@@ -102,7 +102,7 @@ if not df.empty:
             region_performance(df),
             "Region",
             "Revenue",
-            "🌍 Region-wise Performance"
+            "Region-wise Performance"
         ),
         use_container_width=True
     )
@@ -110,5 +110,13 @@ if not df.empty:
     st.divider()
 
     # ---------------- RAW DATA ----------------
-    st.subheader("📄 Live Sales Data (MongoDB Atlas)")
+    st.subheader("Live Sales Data (MongoDB Atlas)")
     st.dataframe(df, use_container_width=True)
+# ------------------- FOOTER -------------------
+st.markdown(
+    """
+    ---
+    **Streamlit Dashboard + MongoDB Atlas**  
+    Developed by ***Naga Niroop***
+    """
+)
