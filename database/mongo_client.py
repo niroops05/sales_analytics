@@ -2,7 +2,7 @@ import os
 from pymongo import MongoClient
 import pandas as pd
 from datetime import datetime, date
-MONGO_URI = "mongodb+srv://niroops05:niroopS05R@cluster0.kxe6ry3.mongodb.net/?appName=Cluster0"
+MONGO_URI = "mongodb+srv://<niroops05>:<niroopS05R>@cluster0.kxe6ry3.mongodb.net/?appName=Cluster0"
 
 client = MongoClient(MONGO_URI)
 db = client["sales_db"]
@@ -26,3 +26,4 @@ def insert_sale(sale_dict):
 def fetch_all_sales():
     data = list(collection.find({}, {"_id": 0}))
     return pd.DataFrame(data)
+
