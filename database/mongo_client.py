@@ -2,7 +2,7 @@ import os
 from pymongo import MongoClient
 import pandas as pd
 from datetime import datetime, date
-MONGO_URI =  "mongodb+srv://niroops05:niroopS05R@cluster0.kxe6ry3.mongodb.net/sales_db?retryWrites=true&w=majority&authSource=admin"
+MONGO_URI =  "mongodb+srv://niroops05:niroopS05R@cluster0.kxe6ry3.mongodb.net/"
 
 client = MongoClient(MONGO_URI)
 db = client["sales_db"]
